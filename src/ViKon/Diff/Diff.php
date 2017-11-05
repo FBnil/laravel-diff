@@ -273,10 +273,10 @@ class Diff{
 	* within 'span' elements, deletions are contained within 'del' elements, and
 	* insertions are contained within 'ins' elements. The parameters are:
 	*
-	* @param string $separator - the separator between lines; this optional parameter defaults to '<br>'
+	* @param string $separator - the separator between lines; this optional parameter defaults to '<br/>'
 	* @returns string
 	*/
-	public function toHTML($separator = '<br>') {
+	public function toHTML($separator = '<br/>') {
 
 		if($this->compareCharacters)
 			$separator = '';
@@ -316,9 +316,9 @@ class Diff{
 	* @param $indentation - indentation to add to every line of the generated HTML; this
 	*                optional parameter defaults to ''
 	* @param $separator   - the separator between lines; this optional parameter
-	*                defaults to '<br>'
+	*                defaults to '<br/>'
 	*/
-	public function toTable($indentation = '', $separator = '<br>') {
+	public function toTable($indentation = '', $separator = '<br/>') {
 
 		if($this->compareCharacters)
 			$separator = '';
