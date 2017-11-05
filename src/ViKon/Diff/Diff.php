@@ -59,8 +59,8 @@ class Diff{
       $end1 = strlen($string1) - 1;
       $end2 = strlen($string2) - 1;
     }else{
-      $sequence1 = preg_split('/\R/', $string1);
-      $sequence2 = preg_split('/\R/', $string2);
+      $sequence1 = preg_split('/\R/u', $string1);
+      $sequence2 = preg_split('/\R/u', $string2);
       $end1 = count($sequence1) - 1;
       $end2 = count($sequence2) - 1;
     }
