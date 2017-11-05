@@ -1,6 +1,12 @@
-# Diff tool
+# Laravel-Diff tool
 
-This package is for comparison strings and show changes.
+This package allows easy comparison of two texts and yields output in plain text, table and html format.
+
+The original Laravel-Diff has a broken diff algorithm. The algorithm used in this fork is from http://code.stephenmorley.org/php/diff-implementation/
+I tried to be compatible, but we are not API compatible.
+
+Warning: Alpha code:
+I am also still moulding it to be better code (exceptions, checks for is_readable() etc).
 
 ## Table of content
 
@@ -8,37 +14,59 @@ This package is for comparison strings and show changes.
 * [Installation](#installation)
 * [Configuration](#configuration)
 * [Usage](#usage)
+* [CSSStyling](#cssstyling)
 
 ---
-[Back to top](#diff-tool)
+[Back to top](#Laravel-Diff)
 
 ## Features
 
 * compare **strings**
 * compare **files**
-* group string differences into **hunk groups**
+* planned: group string differences into **hunk groups**
+* Unicode support
 
 ## Installation
 
 Via `composer`:
 
 ```bash
-composer require vi-kon/laravel-diff
+composer require FBnil/laravel-diff
 ```
 
 ---
-[Back to top](#diff-tool)
+[Back to top](#Laravel-Diff)
+
+## Installation
+If you have Laravel 5.5 installed, that's it. No additional configuration has to be done.
+---
+[Back to top](#Laravel-Diff)
 
 ## Usage
 
-Simple usage:
+Simple oneliner:
 
 ```php
+$htmlSnippet = \ViKon\Diff\Diff::compareFiles($file1, $file2)->toHtml();
+```
+
+Other examples:
+
+```php
+use \ViKon\Diff\Diff;
 // Compare string line by line
 $diff = Diff::compare("hello\na", "hello\nasd\na");
-// Outputs span, ins, del HTML tags, depend if entry
-// is unmodified, inserted or deleted
-echo $diff->toHTML();
+// Outputs span with ins and del HTML tags. You can embed this in a div.
+$html = $diff->toHTML();
+
+// Outputs a side-by-side <table> 
+$html = $diff->toTable();
+
+// Output is text; similar to the Unix command "diff -u"
+$txt = $diff->toString();
+
+// Get the raw data to have more control.
+$struct = $diff->toStruct();
 ```
 
 Compare two file:
@@ -47,58 +75,43 @@ Compare two file:
 // Compare files line by line
 $diff = Diff::compareFiles("a.txt", "b.txt");
 echo $diff->toHTML();
+if($diff->getInsertedCount() == 0 && $diff->getDeletedCount() == 0)
+ echo "Files are identical!"
 ```
 
 You can customize output by getting raw data:
 
 ```php
 
-$options = [
-    // Compare by line or by characters
-    'compareCharacters' => false,
-    // Offset size in hunk groups
-    'offset'            => 2,
-];
-
-$diff = Diff::compare("hello\na", "hello\nasd\na", $options);
-$groups = $diff->getGroups();
-
-foreach($groups as $i => $group)
-{
-    // Output: Hunk 1 : Lines 2 - 6
-    echo 'Hunk ' . $i . ' : Lines ' 
-         . $group->getFirstPosition() . ' - ' . $group->getLastPosition(); 
-    
-    // Output changed lines (entries)
-    foreach($group->getEntries() as $entry)
-    {
-        // Output old position of line
-        echo $entry instanceof \ViKon\Diff\Entry\InsertedEntry 
-            ? '-'
-            : $entry->getOldPosition() + 1;
-
-        echo ' | ';
-
-        // Output new position of line
-        echo $entry instanceof \ViKon\Diff\Entry\DeletedEntry 
-            ? '-'
-            : $entry->getNewPosition() + 1;
-        
-        echo ' - ';        
-
-        // Output line (entry)
-        echo $entry;
-    }
-}
 
 ```
 
 ---
-[Back to top](#diff-tool)
+[Back to top](#Laravel-Diff)
+
+
+## CSSStyling
+
+A little bit of CSS is recommended to make <ins> and <del> look good, for example:
+
+```css
+del {
+  text-decoration: none;
+  background-color: #fbb6c2;
+  color: #555;
+}
+ins {
+  text-decoration: none;
+  background-color: #d4fcbc;
+}
+```
+
+---
+[Back to top](#Laravel-Diff)
 
 ## License
 
-This package is licensed under the MIT License
+This package is a mix between CC and MIT License. Give me some time to sort it out.
 
 ---
-[Back to top](#diff-tool)
+[Back to top](#Laravel-Diff)
