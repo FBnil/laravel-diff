@@ -310,8 +310,10 @@ class Diff{
 
 		}
 
-		if($this->compareCharacters)
+		if($this->compareCharacters){
 			$html = preg_replace('/\R/u','<br/>', $html);
+			$html = preg_replace('~<span> </span>~u','<span>&nbsp;</span>', $html);
+		}
 
 		// return the HTML
 		return $html;
