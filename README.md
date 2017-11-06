@@ -17,7 +17,7 @@ I am also still molding it to be better code (exceptions, checks for is_readable
 * [CSSStyling](#cssstyling)
 
 ---
-[Back to top](#Laravel-Diff tool)
+[Back to top](#Laravel-Diff-tool)
 
 ## Features
 
@@ -34,14 +34,14 @@ composer require FBnil/laravel-diff
 ```
 
 ---
-[Back to top](#Laravel-Diff tool)
+[Back to top](#Laravel-Diff-tool)
 
 ## Installation
 
 If you have Laravel 5.5 installed, that's it. No additional configuration has to be done.
 
 ---
-[Back to top](#Laravel-Diff tool)
+[Back to top](#Laravel-Diff-tool)
 
 ## Usage
 
@@ -100,7 +100,7 @@ echo($MYTEXT);
 ```
 
 ---
-[Back to top](#Laravel-Diff tool)
+[Back to top](#Laravel-Diff-tool)
 
 
 ## CSSStyling
@@ -120,11 +120,11 @@ ins,.diffInserted {
 ```
 
 ---
-[Back to top](#Laravel-Diff tool)
+[Back to top](#Laravel-Diff-tool)
 
 ## License
 
 This package is a mix between CC and MIT License. Give me some time to sort it out.
 
 ---
-[Back to top](#Laravel-Diff tool)
+[Back to top](#Laravel-Diff-tool)
