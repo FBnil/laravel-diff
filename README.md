@@ -17,31 +17,33 @@ I am also still molding it to be better code (exceptions, checks for is_readable
 * [CSSStyling](#cssstyling)
 
 ---
-[Back to top](#Laravel-Diff-tool)
+[Back to top](#laravel-diff-tool)
 
 ## Features
 
-* compare **strings**
-* compare **files**
+* compare two **strings**
+* compare two text **files**
 * Unicode support
+* Outputs a html snippet you can embed into a `<div>`
+* The output can be a side-by-side `<table>`, a line by line diff `<span>` or a minimal word analysis diff. 
 
 ## Installation
 
-Via `composer`:
+Using `composer`:
 
 ```bash
 composer require FBnil/laravel-diff
 ```
 
 ---
-[Back to top](#Laravel-Diff-tool)
+[Back to top](#laravel-diff-tool)
 
 ## Installation
 
 If you have Laravel 5.5 installed, that's it. No additional configuration has to be done.
 
 ---
-[Back to top](#Laravel-Diff-tool)
+[Back to top](#laravel-diff-tool)
 
 ## Usage
 
@@ -83,6 +85,13 @@ if($diff->getInsertedCount() == 0 && $diff->getDeletedCount() == 0)
 You can process the raw data:
 
 ```php
+/* Returns the diff for two files. The parameters are:
+*
+* @param $file1      - the path to the first file
+* @param $file2      - the path to the second file
+* $compareCharacters - true to compare characters, and false to compare lines. Optional; defaults to false.
+*/
+$diff = \ViKon\Diff\Diff::compareFiles($file1, $file2, true);
 $AoA = $diff->toStruct();
 $MYTEXT = '';
 foreach($AoA as $charArr){
@@ -99,8 +108,9 @@ foreach($AoA as $charArr){
 echo($MYTEXT);
 ```
 
+
 ---
-[Back to top](#Laravel-Diff-tool)
+[Back to top](#laravel-diff-tool)
 
 
 ## CSSStyling
@@ -120,11 +130,11 @@ ins,.diffInserted {
 ```
 
 ---
-[Back to top](#Laravel-Diff-tool)
+[Back to top](#laravel-diff-tool)
 
 ## License
 
 This package is a mix between CC and MIT License. Give me some time to sort it out.
 
 ---
-[Back to top](#Laravel-Diff-tool)
+[Back to top](#laravel-diff-tool)
