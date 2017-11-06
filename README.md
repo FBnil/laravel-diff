@@ -14,7 +14,7 @@ I am also still molding it to be better code (exceptions, checks for is_readable
 * [Installation](#installation)
 * [Configuration](#configuration)
 * [Usage](#usage)
-* [CSSStyling](#cssstyling)
+* [CSS Styling](#css-styling)
 
 ---
 [Back to top](#laravel-diff-tool)
@@ -38,7 +38,7 @@ composer require FBnil/laravel-diff
 ---
 [Back to top](#laravel-diff-tool)
 
-## Installation
+## Configuration
 
 If you have Laravel 5.5 installed, that's it. No additional configuration has to be done.
 
@@ -113,7 +113,7 @@ echo($MYTEXT);
 [Back to top](#laravel-diff-tool)
 
 
-## CSSStyling
+## CSS Styling
 
 A little bit of CSS is recommended to make `<ins>` and `<del>` look good, for example:
 
