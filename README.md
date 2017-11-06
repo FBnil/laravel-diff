@@ -8,6 +8,9 @@ I tried to be compatible, but we are not API compatible.
 Warning: Alpha code:
 I am also still molding it to be better code (exceptions, checks for is_readable() etc).
 
+![examples](diff_looks.jpg?raw=true "Different looks with basic css")
+
+
 ## Table of content
 
 * [Features](#features)
@@ -118,14 +121,23 @@ echo($MYTEXT);
 A little bit of CSS is recommended to make `<ins>` and `<del>` look good, for example:
 
 ```css
-del,.diffDeleted {
+del, .diffDeleted {
   text-decoration: none;
   background-color: #fbb6c2;
   color: #555;
 }
-ins,.diffInserted {
+
+ins, .diffInserted {
   text-decoration: none;
   background-color: #d4fcbc;
+}
+
+table.diff , table.diff th, table.diff td{
+	border: 1px solid #EEE;
+}
+
+table.diff th, table.diff td{
+	padding: 5px; /* Apply cell padding */
 }
 ```
 
