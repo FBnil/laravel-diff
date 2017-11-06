@@ -51,25 +51,33 @@ class Diff{
 		return new self($string1, $string2, $compareCharacters);
 	}
 
+	/* Splits a Unicode string into multibyte "letters"
+	* @param string $string
+	* 
+	* @returns array
+	*/
 	public static function mbStringToArray($string) {
-		$strlen = mb_strlen($string);
-		while ($strlen) {
-			$array[] = mb_substr($string, 0, 1, "UTF-8");
-			$string = mb_substr($string, 1, $strlen, "UTF-8");
-			$strlen = mb_strlen($string);
-		}
-		return $array;
+		return preg_split('//u', $string, -1, PREG_SPLIT_NO_EMPTY);
 	}
 
 	protected function __construct($string1, $string2, $compareCharacters = false) {
 
+		$this->compareCharacters = $compareCharacters;
+
 		// initialise the sequences and comparison start and end positions
 		$start = 0;
 		if ($compareCharacters) {
-			$sequence1 = $this->mbStringToArray($string1);
-			$sequence2 = $this->mbStringToArray($string2);
-			$end1 = count($sequence1) - 1;
-			$end2 = count($sequence2) - 1;
+			if(mb_check_encoding($string1) || mb_check_encoding($string2)){
+				$sequence1 = $this->mbStringToArray($string1);
+				$sequence2 = $this->mbStringToArray($string2);
+				$end1 = count($sequence1) - 1;
+				$end2 = count($sequence2) - 1;				
+			} else {
+				$sequence1 = $string1;
+				$sequence2 = $string2;
+				$end1 = strlen($string1) - 1;
+				$end2 = strlen($string2) - 1;
+			}
 		} else {
 			$sequence1 = preg_split('/\R/u', $string1);
 			$sequence2 = preg_split('/\R/u', $string2);
@@ -108,7 +116,6 @@ class Diff{
 
 		// return the diff
 		$this->diff = $diff;
-		$this->compareCharacters = $compareCharacters;
 
 	}
 
